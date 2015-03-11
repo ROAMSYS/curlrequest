@@ -279,6 +279,13 @@ exports.request = function (options, callback) {
           stderr += data;
         });
 
+        //Handle curl error
+        curl.on('error', function(error) {
+          err = error;
+          finish();
+          if (timeout) clearTimeout(timeout);
+        })
+
         //Handle curl exit
         curl.on('exit', function (code) {
             try {
@@ -402,4 +409,3 @@ exports.copy = function (obj) {
     }
     return copy;
 };
-
