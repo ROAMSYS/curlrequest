@@ -279,12 +279,12 @@ exports.request = function (options, callback) {
           stderr += data;
         });
 
-        //Handle curl error
+        //Handle child_process errors
         curl.on('error', function(error) {
           err = error;
           finish();
           if (timeout) clearTimeout(timeout);
-        })
+        });
 
         //Handle curl exit
         curl.on('exit', function (code) {
